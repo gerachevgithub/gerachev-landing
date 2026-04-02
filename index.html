@@ -1,28 +1,481 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gerardo Chevez | Apps iOS</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerardo Chevez — iOS Developer</title>
+  <meta name="description" content="Apps iOS nativas diseñadas para simplificar tu vida financiera y aumentar tu productividad." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F8F7F4;
+      --surface: #FFFFFF;
+      --border: #E2E0D8;
+      --text-primary: #1A1916;
+      --text-secondary: #6B6860;
+      --text-muted: #A09E9A;
+      --accent: #1A1916;
+      --accent-subtle: #F0EEE8;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248, 247, 244, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* HERO */
+    .hero {
+      padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 8vw, 6rem);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      max-width: 820px;
+    }
+
+    h1 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* APPS SECTION */
+    .section {
+      padding: clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 200px;
+    }
+
+    /* APP GRID */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .app-card {
+      background: var(--surface);
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .app-card:hover { background: var(--accent-subtle); }
+
+    .app-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .app-icon.green  { background: #E8F5E9; }
+    .app-icon.blue   { background: #E3F2FD; }
+    .app-icon.orange { background: #FFF3E0; }
+    .app-icon.purple { background: #F3E5F5; }
+    .app-icon.teal   { background: #E0F2F1; }
+    .app-icon.red    { background: #FFEBEE; }
+
+    .app-name {
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .app-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .app-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
+    }
+
+    .app-link {
+      font-size: 11px;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 10px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .app-link:hover {
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .stack-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .stack-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .stack-item:last-child { border-bottom: none; }
+
+    .stack-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .stack-item span {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 1.5rem;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text-primary); }
+
+    /* DIVIDER */
+    .full-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag   { animation: fadeUp 0.5s ease both; }
+    h1           { animation: fadeUp 0.5s 0.08s ease both; }
+    .hero-sub    { animation: fadeUp 0.5s 0.16s ease both; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Gerardo Chevez</h1>
-    <p>Explora mis apps móviles y recursos.</p>
 
-    <ul class="app-links">
-      <li><a href="#">📱 GoalSave</a></li>
-      <li><a href="#">💳 CreditDebt Manager</a></li>
-      <li><a href="#">🧾 SplitBite (PagoYo)</a></li>
-      <li><a href="#">🦷 AlfaTrack</a></li>
+  <nav>
+    <a href="/" class="nav-logo">gerachev.com</a>
+    <ul class="nav-links">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
+  </nav>
 
-    <footer>
-      <a href="legal/privacy.html">Política de privacidad</a> |
-      <a href="legal/terms.html">Términos</a> |
-      <a href="legal/ads.html">Anuncios (AdMob)</a>
-    </footer>
-  </div>
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag">iOS Developer · El Salvador</p>
+    <h1>Apps nativas<br>para <em>simplificar</em><br>lo complejo.</h1>
+    <p class="hero-sub">Desarrollador independiente creando herramientas iOS para finanzas personales, productividad y análisis deportivo.</p>
+  </section>
+
+  <div class="full-divider"></div>
+
+  <!-- APPS -->
+  <section class="section" id="apps">
+    <p class="section-label">Aplicaciones</p>
+    <div class="apps-grid">
+
+      <div class="app-card">
+        <div class="app-icon green">💰</div>
+        <div>
+          <p class="app-name">GoalStack</p>
+          <p class="app-desc">Rastreador de metas de ahorro gamificado. Visualiza tu progreso y celebra cada logro.</p>
+        </div>
+        <div class="app-links">
+          <a href="legal/goalstack/privacy.html" class="app-link">Privacidad</a>
+          <a href="legal/goalstack/terms.html" class="app-link">Términos</a>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon blue">📸</div>
+        <div>
+          <p class="app-name">CalSnap</p>
+          <p class="app-desc">Contador de calorías con IA. Fotografía tu comida y obtén análisis nutricional al instante.</p>
+        </div>
+        <div class="app-links">
+          <a href="legal/calsnap/privacy.html" class="app-link">Privacidad</a>
+          <a href="legal/calsnap/terms.html" class="app-link">Términos</a>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon purple">🧾</div>
+        <div>
+          <p class="app-name">QuotifyPro</p>
+          <p class="app-desc">Gestión de cotizaciones y facturas para freelancers. Profesional, rápido y sin complicaciones.</p>
+        </div>
+        <div class="app-links">
+          <a href="legal/quotifypro/privacy.html" class="app-link">Privacidad</a>
+          <a href="legal/quotifypro/terms.html" class="app-link">Términos</a>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon orange">📋</div>
+        <div>
+          <p class="app-name">SubsTrack</p>
+          <p class="app-desc">Controla todas tus suscripciones en un solo lugar. Nunca más pagues por algo que olvidaste.</p>
+        </div>
+        <div class="app-links">
+          <a href="legal/substrack/privacy.html" class="app-link">Privacidad</a>
+          <a href="legal/substrack/terms.html" class="app-link">Términos</a>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon teal">⚽</div>
+        <div>
+          <p class="app-name">TacticReel</p>
+          <p class="app-desc">Análisis táctico de video para fútbol en iPad. Anota, dibuja y exporta jugadas al instante.</p>
+        </div>
+        <div class="app-links">
+          <a href="legal/tacticreel/privacy.html" class="app-link">Privacidad</a>
+          <a href="legal/tacticreel/terms.html" class="app-link">Términos</a>
+        </div>
+      </div>
+
+      <!-- Placeholder para futura app -->
+      <div class="app-card" style="opacity: 0.45; pointer-events: none;">
+        <div class="app-icon" style="background: var(--accent-subtle);">✦</div>
+        <div>
+          <p class="app-name" style="color: var(--text-muted);">Próximamente</p>
+          <p class="app-desc">Más apps en desarrollo.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="full-divider"></div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <p class="section-label">Sobre mí</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Construyendo herramientas que la gente <em>realmente</em> usa.</h2>
+        <p>Desarrollo apps iOS nativas con Swift y SwiftUI, enfocadas en experiencias fluidas, diseño cuidadoso y monetización justa. Cada app nace de un problema real.</p>
+      </div>
+      <ul class="stack-list">
+        <li class="stack-item"><span class="stack-dot"></span><span>Swift & SwiftUI</span></li>
+        <li class="stack-item"><span class="stack-dot"></span><span>SwiftData & CloudKit</span></li>
+        <li class="stack-item"><span class="stack-dot"></span><span>StoreKit 2 (freemium)</span></li>
+        <li class="stack-item"><span class="stack-dot"></span><span>AVFoundation & Vision</span></li>
+        <li class="stack-item"><span class="stack-dot"></span><span>WidgetKit & Swift Charts</span></li>
+        <li class="stack-item"><span class="stack-dot"></span><span>GPT-4o Vision API</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-copy">© 2025 Gerardo Chevez</p>
+    <nav class="footer-links">
+      <a href="legal/privacy.html">Privacidad general</a>
+      <a href="legal/terms.html">Términos generales</a>
+      <a href="legal/ads.html">Política de anuncios</a>
+    </nav>
+  </footer>
+
 </body>
 </html>
