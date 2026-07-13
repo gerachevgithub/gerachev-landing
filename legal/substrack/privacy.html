@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — SubsTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #F5F0E8;
+      --surface:   #EDEAE0;
+      --ink:       #1A1A1A;
+      --ink2:      #555550;
+      --ink3:      #888880;
+      --accent:    #1A1A1A;
+      --purple:    #7C3AED;
+      --border:    rgba(26,26,26,0.10);
+      --radius:    14px;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    nav .back {
+      font-size: 13px; color: var(--ink3);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+    }
+    nav .back:hover { color: var(--ink); }
+
+    /* ── Header ── */
+    header {
+      padding: 64px 32px 48px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .app-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--ink3);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+    .app-tag .dot {
+      width: 6px; height: 6px;
+      background: var(--purple);
+      border-radius: 50%;
+    }
+    header h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    header h1 em {
+      font-style: normal;
+      color: var(--purple);
+    }
+    .meta {
+      font-size: 13px;
+      color: var(--ink3);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── Content ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 32px 96px;
+    }
+
+    .section {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+    .section:last-child { border-bottom: 1px solid var(--border); }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--ink3);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: var(--ink2);
+      margin-bottom: 12px;
+    }
+    .section p:last-child { margin-bottom: 0; }
+
+    .section ul {
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .section ul li {
+      font-size: 15px;
+      color: var(--ink2);
+      padding-left: 20px;
+      position: relative;
+    }
+    .section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--ink3);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+    }
+
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+    .highlight-box p { margin: 0; font-size: 14px; }
+
+    strong { color: var(--ink); font-weight: 600; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink3);
+    }
+    footer a { color: var(--ink3); font-size: 12px; }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 600px) {
+      nav, header, .container { padding-left: 20px; padding-right: 20px; }
+      header { padding-top: 40px; padding-bottom: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://gerachev.com" class="logo">gerachev.com</a>
+  <a href="https://gerachev.com" class="back">← Back</a>
+</nav>
+
+<header>
+  <div class="app-tag"><span class="dot"></span> SubsTrack · Legal</div>
+  <h1>Privacy <em>Policy</em></h1>
+  <p class="meta">Last updated · July 2026</p>
+</header>
+
+<div class="container">
+
+  <div class="section">
+    <p class="section-label">01 — Overview</p>
+    <h2>Introduction</h2>
+    <p>Welcome to SubsTrack. This Privacy Policy explains how we collect, use, and protect your information when you use our iOS application.</p>
+    <p>By using SubsTrack, you agree to the practices described in this policy.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">02 — Data</p>
+    <h2>Information We Collect</h2>
+    <p><strong>Data you provide:</strong></p>
+    <ul>
+      <li>Name and amount of your subscriptions</li>
+      <li>Billing dates and payment cycles</li>
+      <li>Categories and notes you assign</li>
+    </ul>
+    <p><strong>Automatically collected data:</strong></p>
+    <ul>
+      <li>Advertising identifier (IDFA) for personalized ads — only if you grant permission via the App Tracking Transparency prompt</li>
+      <li>Anonymous usage data to improve the app experience</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">03 — Usage</p>
+    <h2>How We Use Your Information</h2>
+    <ul>
+      <li>To display your subscription summary and spending insights</li>
+      <li>To send you upcoming billing notifications</li>
+      <li>To show relevant ads to free-tier users via Google AdMob</li>
+      <li>To improve app performance and experience</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">04 — Storage</p>
+    <h2>Data Storage</h2>
+    <p>All your subscription data is stored <strong>locally on your device</strong>. We do not upload or store your financial data on external servers.</p>
+    <p>Widget data is shared between the app and the widget using iOS App Groups — this data never leaves your device.</p>
+    <div class="highlight-box">
+      <p>💡 SubsTrack does not have a backend server. Your data stays on your iPhone.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">05 — Advertising</p>
+    <h2>Advertising (Google AdMob)</h2>
+    <p>SubsTrack shows ads to free-tier users via Google AdMob. AdMob may collect and use data to personalize ads according to their own privacy policies.</p>
+    <p>You can permanently remove all ads by purchasing <strong>SubsTrack Premium</strong>.</p>
+    <p>Learn more: <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy ↗</a></p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">06 — Purchases</p>
+    <h2>In-App Purchases</h2>
+    <p>SubsTrack offers a one-time purchase (<strong>Premium — $1.99</strong>) processed entirely by Apple App Store. We do not store, see, or have access to any payment data.</p>
+    <p>See <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's Privacy Policy ↗</a> for purchase-related details.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">07 — Children</p>
+    <h2>Children's Privacy</h2>
+    <p>SubsTrack is not directed at children under 13. We do not knowingly collect personal information from minors. If you believe a child has provided us with information, please contact us.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">08 — Updates</p>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this policy occasionally. We will notify you through the app or by updating the date at the top of this page. Continued use of SubsTrack after changes implies your acceptance.</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">09 — Contact</p>
+    <h2>Get in Touch</h2>
+    <p>Questions or concerns about this Privacy Policy?</p>
+    <div class="highlight-box">
+      <p>Email us at <a href="mailto:gerachev.entropia@gmail.com">gerachev.entropia@gmail.com</a></p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Gerardo Chevez</p>
+  <div style="display:flex;gap:20px">
+    <a href="/legal/substrack/terms.html">Terms of Use</a>
+    <a href="https://gerachev.com">gerachev.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
