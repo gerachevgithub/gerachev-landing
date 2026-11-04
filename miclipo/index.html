@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiClipo — Agenda, caja y comisiones para barberías y salones</title>
+<meta name="description" content="Agenda, turnos sin cita, cobro con propina, comisiones y alquiler de silla, y cierre de caja para barberías, salones, uñas, cejas y pestañas. Pago único. iPhone, iPad y Android.">
+<meta property="og:title" content="MiClipo — Agenda, caja y comisiones para barberías y salones">
+<meta property="og:description" content="Agenda, turnos sin cita, cobro con propina, comisiones y alquiler de silla, y cierre de caja para barberías, salones, uñas, cejas y pestañas. Pago único. iPhone, iPad y Android.">
+<meta property="og:url" content="https://www.gerachev.com/miclipo/">
+<meta property="og:image" content="https://www.gerachev.com/assets/icons/miclipo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="/assets/icons/miclipo.png">
+<link rel="apple-touch-icon" href="/assets/icons/miclipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F8F7F4;--surface:#FFFFFF;--border:#E2E0D8;--ink:#1A1916;--text2:#5F5C55;--muted:#77746D;--subtle:#F0EEE8;--lime:#D7FF3A;--dark:#111111;--r:18px}
+@media (prefers-color-scheme:dark){:root{--bg:#121210;--surface:#1B1B19;--border:#2E2D29;--ink:#F4F3EF;--text2:#B3B0A8;--muted:#8F8C85;--subtle:#23231F}}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}
+.mono{font-family:'DM Mono',monospace}
+nav.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+nav.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:500}
+nav.top .brand img{width:30px;height:30px;border-radius:8px}
+nav.top ul{display:flex;gap:clamp(.8rem,3vw,1.8rem);list-style:none}
+nav.top ul a{font-size:14px;color:var(--text2);text-decoration:none}
+nav.top ul a:hover{color:var(--ink)}
+@media (max-width:620px){nav.top ul li.hide-sm{display:none}}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:clamp(3rem,9vw,6.5rem) 0 clamp(3rem,7vw,5rem)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.6rem}
+.tag img{width:22px;height:22px;border-radius:6px}
+h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:300;line-height:1.06;letter-spacing:-.03em}
+h1 em{font-style:italic}
+.hl{background:linear-gradient(transparent 60%,var(--lime) 60%,var(--lime) 92%,transparent 92%);color:#1A1916;padding:0 .06em}
+@media (prefers-color-scheme:dark){.hl{color:var(--ink);background:linear-gradient(transparent 60%,rgba(215,255,58,.35) 60%,rgba(215,255,58,.35) 92%,transparent 92%)}}
+.lead{margin-top:1.6rem;font-size:clamp(1rem,2vw,1.15rem);color:var(--text2);font-weight:300;max-width:520px;line-height:1.7}
+.stores{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.store{display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;text-decoration:none;border-radius:12px;padding:9px 16px;min-width:180px}
+.store svg{width:24px;height:24px;flex:none}
+.store small{display:block;font-size:10.5px;opacity:.75;line-height:1.1}
+.store b{display:block;font-weight:500;font-size:15px;line-height:1.2}
+.store.soon{opacity:.82}
+.note{margin-top:.9rem;font-size:13px;color:var(--muted)}
+/* teléfono */
+.phones{position:relative;display:flex;justify-content:center;gap:1rem;min-height:520px}
+.phone{width:250px;height:520px;border-radius:40px;background:#0b0b0c;padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.35);flex:none}
+.phone.back{position:absolute;right:calc(50% - 250px);top:46px;transform:rotate(5deg) scale(.92);opacity:.97}
+.phone.front{position:relative;left:-60px;z-index:2}
+@media (max-width:620px){.phone.back{display:none}.phone.front{left:0}}
+.screen{width:100%;height:100%;border-radius:31px;background:#F2F2F0;overflow:hidden;color:#111;font-size:11px;position:relative}
+.sb{display:flex;justify-content:space-between;padding:10px 18px 4px;font-weight:600;font-size:10px}
+.scr-pad{padding:6px 12px}
+.scr-title{font-size:19px;font-weight:600;letter-spacing:-.02em;margin:4px 2px 8px}
+.darkcard{background:#111;color:#fff;border-radius:16px;padding:12px 14px;margin-bottom:8px}
+.darkcard .lbl{font-size:9.5px;opacity:.7}
+.darkcard .big{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:2px}
+.darkcard .pill{display:inline-block;background:var(--lime);color:#111;border-radius:99px;padding:2px 8px;font-size:9px;font-weight:600;margin-top:6px}
+.cnts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.cnt{background:#fff;border-radius:12px;padding:8px}
+.cnt b{display:block;font-size:16px}
+.cnt span{font-size:8.5px;color:#6B6B70}
+.row{background:#fff;border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.av{width:26px;height:26px;border-radius:50%;background:#E5E5EA;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:10px;flex:none}
+.row .nm{flex:1;font-weight:600;font-size:10.5px}
+.row .nm small{display:block;font-weight:400;color:#6B6B70;font-size:9px}
+.st{font-size:8.5px;font-weight:600;border-radius:99px;padding:2px 7px}
+.st.late{background:#FEE2E2;color:#991B1B}.st.today{background:#FFEDD5;color:#9A3412}.st.ok{background:#DCFCE7;color:#166534}.st.soon{background:#FEF3C7;color:#92400E}
+.mini-btn{background:var(--lime);color:#111;font-weight:600;font-size:9px;border-radius:99px;padding:3px 9px}
+.tabbar{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #E5E5EA;display:flex;justify-content:space-around;padding:8px 6px 14px;font-size:8.5px;color:#8E8E93}
+.tabbar b{color:#111}
+.rcpt{background:#fff;border-radius:16px;margin:10px 12px;padding:14px}
+.rcpt .ok{width:34px;height:34px;border-radius:50%;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 6px}
+.rcpt h4{text-align:center;font-size:13px}
+.rcpt .sm{text-align:center;color:#6B6B70;font-size:9px;margin-bottom:10px}
+.rl{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #E5E5EA;font-size:10px}
+.rl:last-of-type{border-bottom:none}
+.tot{display:flex;justify-content:space-between;background:#111;color:#fff;border-radius:10px;padding:8px 10px;margin-top:8px;font-weight:600}
+.legend{font-size:8px;color:#8E8E93;text-align:center;margin-top:8px}
+.wa{background:#25D366;color:#fff;text-align:center;border-radius:12px;padding:9px;font-weight:600;margin:0 12px 6px}
+.share{background:#fff;text-align:center;border-radius:12px;padding:9px;font-weight:600;margin:0 12px}
+.tablet{width:min(520px,100%);aspect-ratio:4/3;border-radius:28px;background:#0b0b0c;padding:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.35)}
+.tablet .screen{border-radius:18px;background:#0f1a12;color:#fff}
+.tablet.tilt{transform:rotate(-2deg)}
+.tablet svg{display:block;width:100%;height:100%}
+/* secciones */
+section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--border)}
+.label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;letter-spacing:-.025em;line-height:1.12;max-width:720px}
+h2 em{font-style:italic}
+.sub2{color:var(--text2);font-weight:300;max-width:620px;margin-top:1rem;line-height:1.7}
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+@media (max-width:760px){.props{grid-template-columns:1fr}}
+.prop{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem}
+.prop .n{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+.prop h3{font-size:1.1rem;font-weight:500;margin:.4rem 0}
+.prop p{color:var(--text2);font-size:.92rem;font-weight:300}
+.feats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5px;background:var(--border);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:2.5rem}
+.feat{background:var(--surface);padding:1.6rem}
+.feat .ic{font-size:22px;width:44px;height:44px;border-radius:12px;background:var(--subtle);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.feat h3{font-size:1rem;font-weight:500;margin-bottom:.3rem}
+.feat p{color:var(--text2);font-size:.88rem;font-weight:300;line-height:1.6}
+.pro-tag{font-family:'DM Mono',monospace;font-size:9.5px;background:var(--lime);color:#111;border-radius:99px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:2rem}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+.steps ol{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex:none}
+.steps li b{display:block;font-weight:500}
+.steps li span{color:var(--text2);font-size:.92rem;font-weight:300}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+@media (max-width:860px){.prices{grid-template-columns:1fr}}
+.price{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;display:flex;flex-direction:column;gap:.8rem}
+.price.best{background:var(--dark);color:#F4F3EF;border-color:var(--dark)}
+.price.best .muted,.price.best li{color:#C9C6BE}
+.price .pn{font-weight:500;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
+.price .amt{font-size:2.4rem;font-weight:300;letter-spacing:-.03em}
+.price .amt small{font-size:.9rem;color:var(--muted)}
+.price ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.price li{font-size:.9rem;color:var(--text2);padding-left:1.4rem;position:relative}
+.price li::before{content:'✓';position:absolute;left:0;color:#16A34A;font-weight:600}
+.price.best li::before{color:var(--lime)}
+.badge{font-family:'DM Mono',monospace;font-size:10px;background:var(--lime);color:#111;border-radius:99px;padding:2px 8px}
+.muted{color:var(--muted);font-size:.85rem}
+.faq{margin-top:2rem;border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
+.faq details{background:var(--surface);border-bottom:1px solid var(--border)}
+.faq details:last-child{border-bottom:none}
+.faq summary{cursor:pointer;list-style:none;padding:1.1rem 1.4rem;font-weight:500;display:flex;justify-content:space-between;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-weight:300;font-size:1.3rem;line-height:1;color:var(--muted)}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 1.4rem 1.2rem;color:var(--text2);font-weight:300;line-height:1.7}
+.cta{background:var(--dark);color:#F4F3EF;border-radius:var(--r);padding:clamp(2rem,5vw,3.5rem);display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between}
+.cta h2{color:#F4F3EF}
+.cta p{color:#B3B0A8;font-weight:300;margin-top:.5rem}
+.btn{display:inline-block;font-size:14px;text-decoration:none;padding:11px 20px;border-radius:99px;border:1px solid var(--border)}
+.btn.lime{background:var(--lime);color:#111;border-color:var(--lime);font-weight:500}
+footer{border-top:1px solid var(--border);padding:2.5rem 0}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer p,footer a{font-size:12px;color:var(--muted);text-decoration:none}
+footer nav{display:flex;gap:1.3rem;flex-wrap:wrap}
+footer a:hover{color:var(--ink)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero > div{animation:fadeUp .6s ease both}.hero .phones{animation-delay:.12s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+.slot{display:flex;gap:6px;align-items:stretch;margin-bottom:6px}
+.slot .t{width:34px;font-size:8.5px;color:#6B6B70;padding-top:6px}
+.slot .ev{flex:1;border-radius:10px;padding:6px 8px;font-size:9.5px;font-weight:600;border-left:4px solid #111}
+.slot .ev small{display:block;font-weight:400;color:#3a3a3d;font-size:8.5px}
+.ev.a{background:#ECFCCB;border-color:#65A30D}.ev.b{background:#E0F2FE;border-color:#0284C7}.ev.c{background:#FFEDD5;border-color:#EA580C}.ev.d{background:#F3E8FF;border-color:#9333EA}
+.qn{width:26px;height:26px;border-radius:50%;background:var(--lime);color:#111;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;flex:none}
+</style>
+</head>
+<body>
+<nav class="top">
+  <a class="brand" href="/miclipo/"><img src="/assets/icons/miclipo.png" alt="">MiClipo</a>
+  <ul>
+    <li class="hide-sm"><a href="#funciones">Funciones</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li class="hide-sm"><a href="#preguntas">Preguntas</a></li>
+    <li><a href="/">gerachev.com</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <p class="tag"><img src="/assets/icons/miclipo.png" alt="">MiClipo · barberías y salones</p>
+      <h1>Tu agenda, tu caja y <span class="hl"><em>las comisiones</em></span> de tu equipo.</h1>
+      <p class="lead">MiClipo organiza citas y clientes sin cita, cobra con propina, manda el ticket y los recordatorios por WhatsApp o SMS, y calcula lo que le toca a cada profesional. Para barberías, salones, uñas, cejas y pestañas.</p>
+      <div class="stores"><div class="store soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.37 12.73c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.66zM14.1 5.98c.63-.77 1.06-1.83.94-2.89-.91.04-2.01.61-2.66 1.37-.58.67-1.09 1.75-.95 2.79 1.01.08 2.04-.51 2.67-1.27z"/></svg><span><small>Próximamente en</small><b>App Store</b></span></div><div class="store soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.3.3-.4.7-.4 1.2v17c0 .5.1.9.4 1.2l9.5-9.7L3.6 2.3zm10.9 11.1 2.6 2.6-10.9 6.2 8.3-8.8zm0-2.8-8.3-8.8 10.9 6.2-2.6 2.6zm4.3-1.8 2.9 1.7c.8.5.8 1.6 0 2.1l-2.9 1.7-2.9-2.8 2.9-2.7z"/></svg><span><small>Próximamente en</small><b>Google Play</b></span></div></div>
+      <p class="note">En piloto con negocios de El Salvador. ¿Quieres participar? Escríbenos.</p>
+    </div>
+    <div class="phones" aria-hidden="true"><div class="phone back"><div class="screen"><div class="sb"><span>9:41</span><span>●●● ▮</span></div><div class="rcpt"><div class="ok">✓</div><h4>Cobro completado</h4><p class="sm">Ticket A-0128 · 4 nov 2026</p>
+<div class="rl"><span>Corte + barba · Carlos</span><span>$12.00</span></div>
+<div class="rl"><span>Diseño / líneas</span><span>$2.00</span></div>
+<div class="rl"><span>Propina 15 %</span><span>$2.10</span></div>
+<div class="rl"><span>Recibido / vuelto</span><span>$20.00 / $3.90</span></div>
+<div class="tot"><span>Total</span><span>$16.10</span></div>
+<p class="legend">Comprobante interno — no válido como factura</p></div>
+<div class="wa">Enviar por WhatsApp</div><div class="share">SMS · Compartir · Imprimir</div></div></div><div class="phone front"><div class="screen"><div class="sb"><span>9:41</span><span>●●● ▮</span></div><div class="scr-pad"><div class="scr-title">Barbería Don Pepe</div>
+<div class="darkcard"><div class="lbl">Hoy</div><div class="big">$286.00</div><span class="pill">Propinas $31.50</span></div>
+<div class="cnts"><div class="cnt"><b>22</b><span>Atenciones</span></div><div class="cnt"><b>3</b><span>En silla</span></div><div class="cnt"><b>4</b><span>En espera</span></div></div>
+<div class="row"><div class="qn">5</div><div class="nm">Mario R.<small>Corte · espera ~15 min</small></div><span class="st soon">En cola</span></div>
+<div class="row"><div class="av">CP</div><div class="nm">Carlos · Daniel M.<small>Corte + barba · termina 10:40</small></div><span class="mini-btn">Cobrar</span></div>
+<div class="row"><div class="av">AN</div><div class="nm">11:00 · Ana López<small>Tinte raíz · Andrea</small></div><span class="st ok">Confirmada</span></div>
+<div class="row"><div class="av">LF</div><div class="nm">11:30 · Luis Flores<small>Corte niño · Carlos</small></div><span class="st today">Recordar</span></div>
+</div><div class="tabbar"><b>Inicio</b><span>Agenda</span><span>Turnos</span><span>Clientes</span><span>Más</span></div></div></div></div>
+  </header>
+
+  <section>
+    <p class="label">Por qué MiClipo</p>
+    <h2>Hecha para como trabaja <em>tu negocio</em>, sin mensualidades por empleado.</h2>
+    <div class="props"><div class="prop"><span class="n">01</span><h3>Citas y turnos sin cita</h3><p>Agenda por profesional y una cola con tiempo de espera para quien llega sin cita. Las citas tienen prioridad.</p></div><div class="prop"><span class="n">02</span><h3>Comisiones claras</h3><p>Porcentaje, alquiler de silla o cabina, mixto o salario. Adelantos, propinas y recibo por WhatsApp.</p></div><div class="prop"><span class="n">03</span><h3>Pago único</h3><p>Sin suscripción por empleado. Funciona sin internet y sin crear cuentas.</p></div></div>
+  </section>
+
+  <section id="funciones">
+    <p class="label">Funciones</p>
+    <h2>Del primer corte del día al cierre de caja.</h2>
+    <div class="feats"><div class="feat"><div class="ic">📅</div><h3>Agenda por profesional</h3><p>Día y semana, columnas por profesional en iPad, bloqueos, choques y estados de cada cita.</p></div><div class="feat"><div class="ic">🪑</div><h3>Turnos sin cita</h3><p>Número del día, espera estimada, "ya es tu turno" por WhatsApp o SMS y "se fue".</p></div><div class="feat"><div class="ic">💬</div><h3>Recordatorios en lote</h3><p>Confirmaciones y recordatorios de mañana, uno tras otro, con plantillas editables.</p></div><div class="feat"><div class="ic">💳</div><h3>Cobro completo</h3><p>Servicios y extras, descuento, propina en caja o directa, efectivo con vuelto, tarjeta, transferencia o mixto.</p></div><div class="feat"><div class="ic">🧾</div><h3>Ticket por WhatsApp o SMS</h3><p>Imagen o PDF, impresión con AirPrint y anulación con motivo.</p></div><div class="feat"><div class="ic">👤</div><h3>Clientes</h3><p>Ficha con historial, gasto, última visita y cada cuántos días vuelve. Importa tu lista desde Excel.</p></div><div class="feat"><div class="ic">💵</div><h3>Comisiones y liquidaciones <span class=pro-tag>PRO</span></h3><p>Libro por profesional, adelantos, ajustes, pago del periodo y recibo.</p></div><div class="feat"><div class="ic">🏷️</div><h3>Alquiler de silla o cabina <span class=pro-tag>PRO</span></h3><p>Renta semanal, quincenal o mensual; el negocio cobra o el profesional cobra directo.</p></div><div class="feat"><div class="ic">🗂️</div><h3>Cierre de caja <span class=pro-tag>PRO</span></h3><p>Efectivo esperado contra contado: cuadra, sobra o falta.</p></div><div class="feat"><div class="ic">📈</div><h3>Gastos y utilidad <span class=pro-tag>PRO</span></h3><p>Ingresos y egresos por categoría y la utilidad real del mes, con el material incluido.</p></div><div class="feat"><div class="ic">📊</div><h3>Reportes <span class=pro-tag>PRO</span></h3><p>Ventas por día o mes, lo más vendido y lo que vende cada profesional.</p></div><div class="feat"><div class="ic">🔒</div><h3>Tus datos, seguros</h3><p>Face ID, iCloud en iPhone y respaldo que también pasa entre iPhone y Android.</p></div></div>
+  </section>
+
+  <section>
+    <p class="label">Cómo funciona</p>
+    <h2>Configúralo en minutos y empieza a atender.</h2>
+    <div class="steps"><ol><li><div><b>Elige tu rubro</b><span>Barbería, salón, uñas, cejas y pestañas o spa: MiClipo sugiere servicios, duraciones y precios.</span></div></li><li><div><b>Agrega a tu equipo</b><span>Horario, servicios que ofrece cada uno y cómo se le paga.</span></div></li><li><div><b>Agenda y atiende</b><span>Citas, turnos y recordatorios con un toque.</span></div></li><li><div><b>Cobra y cierra</b><span>Ticket al cliente, comisiones al libro de cada profesional y caja cuadrada al final del día.</span></div></li></ol>
+      <div class="phones" aria-hidden="true" style="min-height:520px"><div class="phone"><div class="screen"><div class="sb"><span>9:41</span><span>●●● ▮</span></div><div class="scr-pad"><div class="scr-title">Agenda · hoy</div>
+<div class="slot"><span class="t">9:00</span><div class="ev a">Daniel M. · Corte + barba<small>Carlos · en silla</small></div></div>
+<div class="slot"><span class="t">9:45</span><div class="ev b">Sofía R. · Gel semipermanente<small>Karla · confirmada</small></div></div>
+<div class="slot"><span class="t">10:30</span><div class="ev c">Almuerzo<small>Carlos · bloqueado</small></div></div>
+<div class="slot"><span class="t">11:00</span><div class="ev d">Ana López · Tinte raíz<small>Andrea · 90 min</small></div></div>
+<div class="slot"><span class="t">11:30</span><div class="ev a">Luis Flores · Corte niño<small>Carlos · agendada</small></div></div>
+<div class="slot"><span class="t">12:15</span><div class="ev b">Paola G. · Lifting de pestañas<small>Karla · agendada</small></div></div>
+</div><div class="tabbar"><span>Inicio</span><b>Agenda</b><span>Turnos</span><span>Clientes</span><span>Más</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section id="precios">
+    <p class="label">Precios</p>
+    <h2>Pago único. <em>Sin mensualidades.</em></h2>
+    <p class="sub2">Empieza gratis y crece cuando sume tu equipo.</p>
+    <div class="prices" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:1080px"><div class="price"><div class="pn">Gratis</div><div class="amt">$0 <small></small></div><ul><li>1 profesional</li><li>100 atenciones al mes</li><li>Agenda, turnos, clientes y recordatorios</li><li>Cobro y tickets</li><li>Con anuncios (nunca al atender ni cobrar)</li></ul></div><div class="price best"><div class="pn">Pro<span class="badge">Recomendado</span></div><div class="amt">$14.99 <small>pago único</small></div><ul><li>Hasta 4 profesionales</li><li>Atenciones sin límite</li><li>Comisiones, alquiler y liquidaciones</li><li>Cierre de caja, gastos, utilidad y reportes</li><li>Tu logo y color · sin anuncios</li></ul></div><div class="price"><div class="pn">Ilimitado</div><div class="amt">$29.99 <small>pago único</small></div><ul><li>Profesionales sin límite</li><li>Todo lo de Pro</li><li>Mejora desde Pro por $14.99</li></ul></div></div>
+    <p class="muted" style="margin-top:1rem">Precios de referencia en dólares; la tienda muestra el precio en tu moneda. Las compras no pasan entre iPhone y Android. ¿Necesitas algo hecho a tu medida? Se cotiza aparte: <a href="mailto:gerachev.dev@gmail.com?subject=MiClipo%20-%20Soluci%C3%B3n%20a%20la%20medida">escríbenos</a>.</p>
+  </section>
+
+  <section id="preguntas">
+    <p class="label">Preguntas frecuentes</p>
+    <h2>Lo que más nos preguntan</h2>
+    <div class="faq"><details><summary>¿Necesito internet?</summary><p>No. MiClipo funciona sin conexión. Internet solo se usa para abrir WhatsApp y para sincronizar con iCloud.</p></details><details><summary>¿Mis clientes necesitan descargar algo?</summary><p>No. Reciben sus recordatorios y su ticket por WhatsApp o SMS. Tú envías cada mensaje con un toque; MiClipo lo deja escrito.</p></details><details><summary>¿Qué cuenta como atención en el plan gratis?</summary><p>Cada cita o turno del mes y cada cobro rápido sin cita. Las canceladas y las que no vinieron no cuentan. El conteo se reinicia el día 1 y lo ya agendado siempre se puede cobrar.</p></details><details><summary>¿El ticket es una factura?</summary><p>No. Es un comprobante interno, no válido como factura. MiClipo no emite documentos tributarios electrónicos.</p></details><details><summary>¿Cómo se usa con varios profesionales?</summary><p>MiClipo vive en el teléfono o tablet de la caja o recepción. Cada profesional recibe su agenda de mañana y su recibo de liquidación por WhatsApp o SMS.</p></details><details><summary>¿Hay versión para Android?</summary><p>Sí, MiClipo es para iPhone, iPad y Android. Puedes pasar tus datos entre plataformas con el respaldo; las compras se hacen en cada tienda.</p></details><details><summary>Ya tengo mis clientes en Excel, ¿los pierdo?</summary><p>No. Impórtalos desde Más → Datos y seguridad: MiClipo reconoce columnas como nombre, teléfono y notas, y no duplica los que ya tienes.</p></details></div>
+  </section>
+
+  <section style="border-top:none;padding-top:0">
+    <div class="cta">
+      <div><h2>¿Tienes una barbería o un salón?</h2><p>Únete al piloto y ayúdanos a mejorar MiClipo.</p></div>
+      <a class="btn lime" href="mailto:gerachev.dev@gmail.com?subject=MiClipo">Escríbenos</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Gerardo Chevez · <a href="/">gerachev.com</a></p>
+    <nav>
+      <a href="/legal/miclipo/privacy.html">Privacidad</a>
+      <a href="/legal/miclipo/terms.html">Términos</a>
+      <a href="/legal/miclipo/support.html">Soporte</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
