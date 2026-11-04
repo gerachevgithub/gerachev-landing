@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soporte · MiClipo</title>
+<meta name="description" content="Soporte de MiClipo, app de Gerardo Chevez (gerachev).">
+<style>
+:root{--bg:#F2F2F0;--card:#FFFFFF;--ink:#111111;--muted:#6B6B70;--line:#E5E5EA;--lime:#D7FF3A}
+@media (prefers-color-scheme:dark){:root{--bg:#0B0B0C;--card:#1C1C1E;--ink:#FFFFFF;--muted:#A1A1A6;--line:#2C2C2E}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:inherit}
+.wrap{max-width:780px;margin:0 auto;padding:24px 16px 48px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;font-size:14px}
+.top a{text-decoration:none;color:var(--muted)}
+.hero{display:flex;align-items:center;gap:14px;margin:8px 0 18px}
+.badge{width:56px;height:56px;border-radius:14px;background:#111;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.badge span{background:var(--lime);border-radius:6px;padding:2px 6px}
+h1{font-size:28px;line-height:1.2;margin:0}
+.sub{color:var(--muted);font-size:14px;margin:2px 0 0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.tabs a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-size:14px;background:var(--card)}
+.tabs a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card{background:var(--card);border-radius:20px;padding:24px 22px;margin-bottom:16px}
+h2{font-size:19px;margin:26px 0 8px}
+.card h2:first-child{margin-top:0}
+h3{font-size:16px;margin:18px 0 4px}
+ul{padding-left:20px}
+li{margin:4px 0}
+.note{background:var(--bg);border-left:4px solid var(--lime);padding:10px 14px;border-radius:8px;font-size:15px}
+.en{font-size:15px;color:var(--muted)}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:28px}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="/">← gerachev.com</a><a href="#english">English</a></div>
+  <div class="hero"><div class="badge"><span>✂️</span></div>
+    <div><h1>Soporte</h1><p class="sub"><a href="/miclipo/" style="text-decoration:none">MiClipo</a> · Agenda, caja y comisiones para barberías y salones</p></div></div>
+  <nav class="tabs"><a href="privacy.html" class="">Privacidad</a><a href="terms.html" class="">Términos</a><a href="support.html" class="on">Soporte</a></nav>
+  <div class="card">
+<p>¿Necesitas ayuda con MiClipo? Escríbenos a <a href="mailto:gerachev.dev@gmail.com?subject=Soporte%20MiClipo"><strong>gerachev.dev@gmail.com</strong></a> indicando tu teléfono (iPhone, iPad o Android) y una captura del problema. Respondemos en 1–2 días hábiles.</p>
+<div class="note">Dentro de la app tienes guías paso a paso en <strong>Más → Ayuda</strong>: primeros pasos, agenda, turnos, cobrar, mensajes, comisiones, caja y tus datos.</div>
+<h2>Preguntas frecuentes</h2>
+<h3>Compré Pro o Ilimitado y no aparece</h3>
+<p>Abre <strong>Más → Plan</strong> y toca <strong>Restaurar compras</strong> con la misma cuenta de Apple o de Google con la que compraste. Las compras no pasan entre iPhone y Android.</p>
+<h3>No puedo crear más citas</h3>
+<p>En el plan Gratis se pueden crear 100 atenciones al mes (citas, turnos y cobros rápidos). Lo que ya está agendado o en la cola siempre se puede cobrar, y el contador se reinicia el día 1. El avance se ve en la tarjeta "Atenciones este mes" de Inicio.</p>
+<h3>¿Cómo paso mis datos a otro teléfono?</h3>
+<ul>
+<li><strong>iPhone a iPhone/iPad:</strong> inicia sesión con la misma cuenta de iCloud y los datos se sincronizan.</li>
+<li><strong>Cualquier otro caso (incluido iPhone ↔ Android):</strong> en el teléfono anterior ve a Más → Datos y seguridad → Crear respaldo, envíate el archivo .miclipo y en el nuevo usa Restaurar respaldo.</li>
+</ul>
+<h3>WhatsApp dice que el número no es válido</h3>
+<p>Revisa el país del negocio en <strong>Más → Mi negocio</strong>. Los números escritos sin código de país usan ese código. Para clientes de otro país escribe el número con + y su código.</p>
+<h3>En iPhone, ¿cómo envío la imagen del ticket por WhatsApp?</h3>
+<p>Al tocar "Enviar por WhatsApp" la imagen se copia y se abre el chat del cliente con el mensaje escrito: mantén presionado el campo de texto y toca <strong>Pegar</strong>.</p>
+<h3>No me llega el resumen diario</h3>
+<p>Actívalo en <strong>Más → Mensajes → Resumen diario</strong> y verifica que las notificaciones de MiClipo estén permitidas en los ajustes del teléfono.</p>
+<h3>¿Cómo importo mis clientes?</h3>
+<p>En <strong>Más → Datos y seguridad → Importar clientes</strong> elige un archivo de Excel (.xlsx) o CSV con columnas como Nombre, Teléfono y Notas. No se duplican los teléfonos que ya tienes.</p>
+<h3>Necesito una función o un reporte especial para mi negocio</h3>
+<p>Escríbenos desde <strong>Más → Soluciones a la medida</strong> o al correo de soporte. Lo revisamos contigo y te enviamos un presupuesto; se cotiza aparte de los planes.</p>
+<h2>Enlaces</h2>
+<p><a href="privacy.html">Política de privacidad</a> · <a href="terms.html">Términos de uso</a> · <a href="/miclipo/">Página de MiClipo</a></p>
+</div>
+  <div class="card en"><h2 id="english">English summary</h2>
+<p>Need help? Email <a href="mailto:gerachev.dev@gmail.com?subject=MiClipo%20support">gerachev.dev@gmail.com</a> with your device (iPhone, iPad or Android) and a screenshot. To restore a purchase go to More → Plan → Restore purchases with the same Apple or Google account (purchases don't transfer between platforms). The free plan includes 100 services a month; it resets on the 1st and booked appointments can always be charged. To move data to another phone, create a backup (More → Data and security) and restore it on the new device, even across iPhone and Android; on iPhone, iCloud syncs automatically. Import clients from Excel or CSV in More → Data and security. Step-by-step guides are in More → Help. Custom features are quoted separately: contact us from More → Custom solutions.</p>
+</div>
+  <footer>© 2026 Gerardo Chevez · <a href="/">gerachev.com</a> · <a href="mailto:gerachev.dev@gmail.com">gerachev.dev@gmail.com</a></footer>
+</div>
+</body>
+</html>
