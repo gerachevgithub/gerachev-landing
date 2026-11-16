@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seudo — Limpia tus documentos antes de pegarlos en la IA</title>
+<meta name="description" content="Seudo oculta nombres, documentos de identidad, cuentas y datos técnicos de tus textos y PDF antes de pegarlos en ChatGPT o Claude. Todo en tu Mac, sin internet. Luego devuelve los datos reales a la respuesta.">
+<meta property="og:title" content="Seudo — Limpia tus documentos antes de pegarlos en la IA">
+<meta property="og:description" content="Oculta los datos sensibles de tus textos y PDF antes de usarlos con ChatGPT o Claude. Todo en tu Mac, sin internet.">
+<meta property="og:url" content="https://www.gerachev.com/seudo/">
+<meta property="og:image" content="https://www.gerachev.com/assets/icons/seudo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="/assets/icons/seudo.png">
+<link rel="apple-touch-icon" href="/assets/icons/seudo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F8F7F4;--surface:#FFFFFF;--border:#E2E0D8;--ink:#1A1916;--text2:#5F5C55;--muted:#77746D;--subtle:#F0EEE8;--lime:#D7FF3A;--dark:#111111;--r:18px;--seudo:#2F45C9}
+@media (prefers-color-scheme:dark){:root{--bg:#121210;--surface:#1B1B19;--border:#2E2D29;--ink:#F4F3EF;--text2:#B3B0A8;--muted:#8F8C85;--subtle:#23231F}}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}
+nav.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px;padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+nav.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:500}
+nav.top .brand img{width:30px;height:30px;border-radius:8px}
+nav.top ul{display:flex;gap:clamp(.8rem,3vw,1.8rem);list-style:none}
+nav.top ul a{font-size:14px;color:var(--text2);text-decoration:none}
+nav.top ul a:hover{color:var(--ink)}
+@media (max-width:620px){nav.top ul li.hide-sm{display:none}}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:clamp(3rem,9vw,6.5rem) 0 clamp(3rem,7vw,5rem)}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.6rem}
+.tag img{width:22px;height:22px;border-radius:6px}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:300;line-height:1.06;letter-spacing:-.03em}
+h1 em{font-style:italic}
+.hl{background:linear-gradient(transparent 60%,var(--lime) 60%,var(--lime) 92%,transparent 92%);color:#1A1916;padding:0 .06em}
+@media (prefers-color-scheme:dark){.hl{color:var(--ink);background:linear-gradient(transparent 60%,rgba(215,255,58,.35) 60%,rgba(215,255,58,.35) 92%,transparent 92%)}}
+.lead{margin-top:1.6rem;font-size:clamp(1rem,2vw,1.15rem);color:var(--text2);font-weight:300;max-width:540px;line-height:1.7}
+.stores{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.store{display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;text-decoration:none;border-radius:12px;padding:9px 16px;min-width:180px}
+.store svg{width:24px;height:24px;flex:none}
+.store small{display:block;font-size:10.5px;opacity:.75;line-height:1.1}
+.store b{display:block;font-weight:500;font-size:15px;line-height:1.2}
+.store.soon{opacity:.82}
+.note{margin-top:.9rem;font-size:13px;color:var(--muted)}
+/* ventana de Mac */
+.mac{width:100%;max-width:540px;justify-self:center;border-radius:14px;background:#FFFFFF;color:#1A1916;box-shadow:0 30px 60px -20px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.08);overflow:hidden;font-size:13px}
+.mac.tilt{transform:rotate(1.5deg)}
+.mac-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#F2F2F0;border-bottom:1px solid #E5E5EA}
+.mac-bar i{width:11px;height:11px;border-radius:50%;display:block}
+.mac-bar i:nth-child(1){background:#FF5F57}.mac-bar i:nth-child(2){background:#FEBC2E}.mac-bar i:nth-child(3){background:#28C840}
+.mac-bar span{margin-left:8px;font-size:12px;font-weight:500;color:#5F5C55}
+.mac-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+.pane-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#77746D}
+.pane{background:#F8F7F4;border:1px solid #E5E5EA;border-radius:10px;padding:12px 14px;line-height:1.75}
+.pane.out{background:#F3F5FD;border-color:#D7DCF6}
+.mk{border-radius:4px;padding:1px 3px}
+.mk.p{background:#E3E7FB}.mk.i{background:#FFE7CC}.mk.c{background:#DFF3E4}
+.tk{font-family:'DM Mono',monospace;font-size:11.5px;color:#fff;background:var(--seudo);border-radius:5px;padding:1px 5px}
+.mac-foot{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#5F5C55}
+.mac-foot b{background:var(--seudo);color:#fff;border-radius:99px;padding:4px 11px;font-weight:500}
+/* secciones */
+section{padding:clamp(3rem,7vw,5.5rem) 0;border-top:1px solid var(--border)}
+.label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;letter-spacing:-.025em;line-height:1.12;max-width:760px}
+h2 em{font-style:italic}
+.sub2{color:var(--text2);font-weight:300;max-width:640px;margin-top:1rem;line-height:1.7}
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+@media (max-width:760px){.props{grid-template-columns:1fr}}
+.prop{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem}
+.prop .n{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+.prop h3{font-size:1.1rem;font-weight:500;margin:.4rem 0}
+.prop p{color:var(--text2);font-size:.92rem;font-weight:300}
+.feats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5px;background:var(--border);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:2.5rem}
+.feat{background:var(--surface);padding:1.6rem}
+.feat .ic{font-size:22px;width:44px;height:44px;border-radius:12px;background:var(--subtle);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.feat h3{font-size:1rem;font-weight:500;margin-bottom:.3rem}
+.feat p{color:var(--text2);font-size:.88rem;font-weight:300;line-height:1.6}
+.pro-tag{font-family:'DM Mono',monospace;font-size:9.5px;background:var(--lime);color:#111;border-radius:99px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+kbd{font-family:'DM Mono',monospace;font-size:.82em;background:var(--subtle);border:1px solid var(--border);border-radius:5px;padding:0 5px}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:2rem}
+@media (max-width:900px){.steps{grid-template-columns:1fr}}
+.steps ol{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex:none}
+.steps li b{display:block;font-weight:500}
+.steps li span{color:var(--text2);font-size:.92rem;font-weight:300}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+@media (max-width:900px){.prices{grid-template-columns:1fr}}
+.price{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;display:flex;flex-direction:column;gap:.8rem}
+.price.best{background:var(--dark);color:#F4F3EF;border-color:var(--dark)}
+.price.best .muted,.price.best li{color:#C9C6BE}
+.price .pn{font-weight:500;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
+.price .amt{font-size:2.4rem;font-weight:300;letter-spacing:-.03em}
+.price .amt small{font-size:.9rem;color:var(--muted)}
+.price .alt{font-size:.88rem;color:var(--muted);margin-top:-.5rem}
+.price.best .alt{color:#C9C6BE}
+.price ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.price li{font-size:.9rem;color:var(--text2);padding-left:1.4rem;position:relative}
+.price li::before{content:'✓';position:absolute;left:0;color:#16A34A;font-weight:600}
+.price.best li::before{color:var(--lime)}
+.badge{font-family:'DM Mono',monospace;font-size:10px;background:var(--lime);color:#111;border-radius:99px;padding:2px 8px}
+.muted{color:var(--muted);font-size:.85rem}
+.faq{margin-top:2rem;border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
+.faq details{background:var(--surface);border-bottom:1px solid var(--border)}
+.faq details:last-child{border-bottom:none}
+.faq summary{cursor:pointer;list-style:none;padding:1.1rem 1.4rem;font-weight:500;display:flex;justify-content:space-between;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-weight:300;font-size:1.3rem;line-height:1;color:var(--muted)}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 1.4rem 1.2rem;color:var(--text2);font-weight:300;line-height:1.7}
+.cta{background:var(--dark);color:#F4F3EF;border-radius:var(--r);padding:clamp(2rem,5vw,3.5rem);display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between}
+.cta h2{color:#F4F3EF}
+.cta p{color:#B3B0A8;font-weight:300;margin-top:.5rem}
+.btn{display:inline-block;font-size:14px;text-decoration:none;padding:11px 20px;border-radius:99px;border:1px solid var(--border)}
+.btn.lime{background:var(--lime);color:#111;border-color:var(--lime);font-weight:500}
+footer{border-top:1px solid var(--border);padding:2.5rem 0}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer p,footer a{font-size:12px;color:var(--muted);text-decoration:none}
+footer nav{display:flex;gap:1.3rem;flex-wrap:wrap}
+footer a:hover{color:var(--ink)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero > div{animation:fadeUp .6s ease both}.hero .mac{animation:fadeUp .6s .12s ease both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav class="top">
+  <a class="brand" href="/seudo/"><img src="/assets/icons/seudo.png" alt="">Seudo</a>
+  <ul>
+    <li class="hide-sm"><a href="#funciones">Funciones</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li class="hide-sm"><a href="#preguntas">Preguntas</a></li>
+    <li><a href="/">gerachev.com</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <p class="tag"><img src="/assets/icons/seudo.png" alt="">Seudo · para Mac</p>
+      <h1>Antes de pegarlo en la IA, <span class="hl"><em>límpialo.</em></span></h1>
+      <p class="lead">Seudo oculta nombres, documentos de identidad, cuentas, direcciones y datos técnicos de tus textos y PDF antes de que los pegues en ChatGPT o Claude. Cuando la IA responde, te devuelve los datos reales. Todo ocurre en tu Mac: sin internet y sin cuentas.</p>
+      <div class="stores"><div class="store soon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.73c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.66zM14.1 5.98c.63-.77 1.06-1.83.94-2.89-.91.04-2.01.61-2.66 1.37-.58.67-1.09 1.75-.95 2.79 1.01.08 2.04-.51 2.67-1.27z"/></svg><span><small>Próximamente en</small><b>Mac App Store</b></span></div></div>
+      <p class="note">¿Trabajas con documentos de clientes y quieres probarla antes? Escríbenos.</p>
+    </div>
+    <div class="mac tilt" aria-hidden="true">
+      <div class="mac-bar"><i></i><i></i><i></i><span>Seudo · Revisión</span></div>
+      <div class="mac-body">
+        <p class="pane-lbl">Original</p>
+        <div class="pane">Contrato entre <span class="mk p">Rosa Martínez</span> (DUI <span class="mk i">01234567-8</span>) e <span class="mk p">Inversiones Cuscatlán S.A.</span> Pagos a la cuenta <span class="mk i">0012-3456-78</span>, avisos a <span class="mk c">rosa@ejemplo.com</span>.</div>
+        <p class="pane-lbl">Lo que ve la IA</p>
+        <div class="pane out">Contrato entre <span class="tk">[PERSONA_1]</span> (DUI <span class="tk">[DUI_1]</span>) e <span class="tk">[EMPRESA_1]</span>. Pagos a la cuenta <span class="tk">[CUENTA_1]</span>, avisos a <span class="tk">[CORREO_1]</span>.</div>
+        <div class="mac-foot"><span>5 datos ocultos · tabla guardada con Touch ID</span><b>Copiar limpio</b></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <p class="label">Por qué Seudo</p>
+    <h2>La IA ve el caso, <em>no a tu cliente.</em></h2>
+    <div class="props"><div class="prop"><span class="n">01</span><h3>Usa la IA sin exponer a nadie</h3><p>Pega contratos, planillas o logs en ChatGPT o Claude sin entregar nombres, identificaciones ni cuentas.</p></div><div class="prop"><span class="n">02</span><h3>Nada sale de tu Mac</h3><p>Seudo no tiene permiso para usar internet: no hay servidores ni cuentas, y no recopila datos. La detección corre en tu Mac.</p></div><div class="prop"><span class="n">03</span><h3>Vuelve a los datos reales</h3><p>Seudo guarda la tabla de correspondencias cifrada con Touch ID y rellena la respuesta de la IA con los nombres y datos verdaderos.</p></div></div>
+  </section>
+
+  <section id="funciones">
+    <p class="label">Funciones</p>
+    <h2>Hecha para quien trabaja con datos ajenos.</h2>
+    <p class="sub2">Abogados, recursos humanos, contadores, consultores y equipos técnicos que quieren aprovechar la IA sin poner en riesgo la información de sus clientes.</p>
+    <div class="feats"><div class="feat"><div class="ic">📋</div><h3>Limpiar el portapapeles</h3><p>Copia, pulsa <kbd>⌃⌥⌘L</kbd> y pega en la IA. También desde la barra de menú, el menú Servicios y Atajos.</p></div><div class="feat"><div class="ic">📄</div><h3>PDF, Word e imágenes <span class="pro-tag">PRO</span></h3><p>Lee PDF con texto, escaneos y fotos (reconocimiento de texto en tu Mac) y documentos de Word.</p></div><div class="feat"><div class="ic">⬛</div><h3>PDF tachado <span class="pro-tag">PRO</span></h3><p>Exporta un PDF nuevo con cajas negras, sin metadatos ni texto oculto, y Seudo verifica que no quede nada legible.</p></div><div class="feat"><div class="ic">↩️</div><h3>Restaurar la respuesta <span class="pro-tag">PRO</span></h3><p>Pega lo que respondió la IA y Seudo cambia [PERSONA_1] por el nombre real. Pulsa <kbd>⌃⌥⌘R</kbd> desde cualquier app.</p></div><div class="feat"><div class="ic">🌎</div><h3>8 países <span class="pro-tag">PRO</span></h3><p>El Salvador, México, Estados Unidos, Colombia, Argentina, Guatemala, Panamá y España, con dígito verificador. Gratis: un país a elegir.</p></div><div class="feat"><div class="ic">🔑</div><h3>Datos técnicos <span class="pro-tag">PRO</span></h3><p>IPs, claves de API, contraseñas, cadenas de conexión y rutas internas antes de pegar un log o una configuración.</p></div><div class="feat"><div class="ic">📏</div><h3>Reglas propias <span class="pro-tag">PRO</span></h3><p>"Siempre tapar" el nombre de un cliente o un número de expediente; "nunca tapar" el nombre de tu despacho.</p></div><div class="feat"><div class="ic">🗂️</div><h3>Perfiles <span class="pro-tag">PRO</span></h3><p>Legal, Recursos humanos, Contabilidad y Técnico: ajustan qué se tapa según tu trabajo.</p></div><div class="feat"><div class="ic">🔒</div><h3>Tablas con Touch ID <span class="pro-tag">PRO</span></h3><p>Cifradas en tu Mac, con caducidad automática. Continúa una tabla para que el mismo caso tenga las mismas etiquetas.</p></div><div class="feat"><div class="ic">🖱️</div><h3>Desde Finder</h3><p>Clic derecho en un archivo › Acciones rápidas › Limpiar con Seudo.</p></div><div class="feat"><div class="ic">🕒</div><h3>Historial sin contenido</h3><p>Fecha, origen y cuántos datos se ocultaron. Nunca el texto ni el nombre del archivo.</p></div><div class="feat"><div class="ic">✍️</div><h3>Revisas antes de copiar</h3><p>Cada dato marcado por tipo, con los dudosos en ámbar. Quita o agrega lo que quieras.</p></div></div>
+  </section>
+
+  <section>
+    <p class="label">Cómo funciona</p>
+    <h2>Del documento a la respuesta en cuatro pasos.</h2>
+    <div class="steps"><ol><li><div><b>Copia o arrastra</b><span>Copia el texto y pulsa <kbd>⌃⌥⌘L</kbd>, o arrastra un PDF, un Word o un escaneo a la ventana.</span></div></li><li><div><b>Revisa</b><span>Seudo marca cada dato por tipo; tú confirmas, quitas o agregas lo que falte.</span></div></li><li><div><b>Pega en la IA</b><span>La IA recibe [PERSONA_1], [DUI_1] y [CUENTA_1] en lugar de los datos reales.</span></div></li><li><div><b>Restaura</b><span>Pega la respuesta en Seudo y recupera los nombres y datos verdaderos, con Touch ID.</span></div></li></ol>
+      <div class="mac" aria-hidden="true">
+        <div class="mac-bar"><i></i><i></i><i></i><span>Seudo · Restaurar</span></div>
+        <div class="mac-body">
+          <p class="pane-lbl">Respuesta de la IA</p>
+          <div class="pane out"><span class="tk">[PERSONA_1]</span> puede rescindir el contrato si <span class="tk">[EMPRESA_1]</span> no paga dos meses seguidos.</div>
+          <p class="pane-lbl">Restaurada</p>
+          <div class="pane"><span class="mk p">Rosa Martínez</span> puede rescindir el contrato si <span class="mk p">Inversiones Cuscatlán S.A.</span> no paga dos meses seguidos.</div>
+          <div class="mac-foot"><span>2 etiquetas restauradas</span><b>Copiar</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="precios">
+    <p class="label">Precios</p>
+    <h2>Texto gratis, siempre. <em>Pro cuando lo necesites.</em></h2>
+    <p class="sub2">Prueba Seudo Pro gratis durante 7 días o 5 documentos, sin tarjeta. Limpiar texto pegado sigue siendo gratis e ilimitado.</p>
+    <div class="prices"><div class="price"><div class="pn">Gratis</div><div class="amt">$0</div><ul><li>Texto y portapapeles ilimitados</li><li>Nombres, correos, teléfonos, tarjetas e IBAN</li><li>Un país a elegir</li><li>Historial de 7 días</li></ul></div><div class="price best"><div class="pn">Pro Anual<span class="badge">Recomendado</span></div><div class="amt">$39.99 <small>/año</small></div><p class="alt">o $4.99 al mes</p><ul><li>PDF, Word, imágenes y escaneos</li><li>PDF tachado verificado</li><li>Restaurar con tablas cifradas</li><li>8 países y datos técnicos</li><li>Reglas, perfiles e historial completo</li></ul></div><div class="price"><div class="pn">De por vida</div><div class="amt">$99.99 <small>pago único</small></div><ul><li>Todo lo de Pro</li><li>Sin suscripción</li><li>Se restaura en tus otros Mac</li></ul></div></div>
+    <p class="muted" style="margin-top:1rem">Precios de referencia en dólares; la App Store muestra el precio en tu moneda. Precio especial de lanzamiento para el plan de por vida las primeras semanas.</p>
+  </section>
+
+  <section id="preguntas">
+    <p class="label">Preguntas frecuentes</p>
+    <h2>Lo que más nos preguntan</h2>
+    <div class="faq"><details><summary>¿Mis documentos salen de mi Mac?</summary><p>No. Seudo no tiene permiso para conectarse a internet: analiza todo en tu Mac y no tiene servidores ni cuentas. Solo sale lo que tú pegas en la IA, ya limpio.</p></details><details><summary>¿Con qué IA funciona?</summary><p>Con cualquiera: ChatGPT, Claude, Gemini, Copilot o la que uses. Seudo trabaja con el texto que copias y pegas; no se conecta a ninguna.</p></details><details><summary>¿Detecta absolutamente todo?</summary><p>Detecta la gran mayoría de los datos y valida los documentos de identidad con su dígito verificador, pero ninguna herramienta automática es perfecta. Por eso siempre revisas antes de copiar y puedes agregar reglas para lo que se escape.</p></details><details><summary>¿Con Seudo cumplo con las leyes de protección de datos?</summary><p>Seudo es una herramienta de apoyo, no una garantía legal. Los datos seudonimizados siguen siendo datos personales mientras exista la tabla de correspondencias. Consulta las reglas de tu profesión y de tu país.</p></details><details><summary>¿Funciona en iPad, iPhone o Windows?</summary><p>Por ahora es para Mac con macOS 26. Una versión para iPad está en planes.</p></details><details><summary>¿Cómo cancelo la suscripción?</summary><p>Desde tu cuenta de la App Store, en Ajustes del Sistema o en la App Store del Mac. Si eliges el plan de por vida, no hay nada que cancelar.</p></details></div>
+  </section>
+
+  <section style="border-top:none;padding-top:0">
+    <div class="cta">
+      <div><h2>¿Trabajas con documentos de clientes?</h2><p>Cuéntanos cómo usas la IA en tu despacho o equipo y te ayudamos a empezar con Seudo.</p></div>
+      <a class="btn lime" href="mailto:gerachev.dev@gmail.com?subject=Seudo">Escríbenos</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Gerardo Chevez · <a href="/">gerachev.com</a></p>
+    <nav>
+      <a href="/legal/seudo/privacy.html">Privacidad</a>
+      <a href="/legal/seudo/terms.html">Términos</a>
+      <a href="/legal/seudo/support.html">Soporte</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
